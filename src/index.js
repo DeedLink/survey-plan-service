@@ -1,14 +1,15 @@
-require('dotenv').config();
-const express = require('express');
-const app = express();
-const PORT = process.env.PORT || 5002;
+import express from "express";
+import dotenv from "dotenv";
+import { connectDB } from "./config/db.js";
+import planRoutes from "./routes/planRoutes.js";
 
+dotenv.config();
+connectDB();
+
+const app = express();
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('Hello from Node.js backend!');
-});
+app.use("/api/plans", planRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
