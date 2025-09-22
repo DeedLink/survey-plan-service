@@ -36,6 +36,11 @@ const planSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    areaType: {
+        type: String,
+        enum: ['Hectare', 'Acre', 'Square Meter', 'Square Kilometer', 'Square Mile', 'Square Foot', 'Square Yard'],
+        required: true,
+    },
     status: {
         type: String,
         enum: ['active', 'inactive', 'completed'],
