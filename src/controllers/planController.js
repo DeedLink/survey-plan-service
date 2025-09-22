@@ -32,17 +32,37 @@ export const getPlanById = async (req, res) => {
 export const getPlanByDeedNumber = async (req, res) => {
   try {
     const { deedNumber } = req.params;
-    console.log(deedNumber);
-    const plan = await Plan.findOne({ deedNumber });
-    if (!plan) {
-      return res.status(404).json({ message: "Plan not found" });
+
+    if (!deedNumber) {
+      return res.status(400).json({ 
+        success: false, 
+        message: "Deed number is required" 
+      });
     }
-    res.json(plan);
+
+    const plan = await Plan.findOne({ deedNumber });
+
+    if (!plan) {
+      return res.status(404).json({ 
+        success: false, 
+        message: `No plan found for deed number: ${deedNumber}` 
+      });
+    }
+
+    res.status(200).json({ 
+      success: true, 
+      data: plan 
+    });
+
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Error fetching plan by deed number:", error);
+    res.status(500).json({ 
+      success: false, 
+      message: "Server error. Please try again later.", 
+      error: error.message 
+    });
   }
 };
-
 
 export const updatePlan = async (req, res) => {
   try {
