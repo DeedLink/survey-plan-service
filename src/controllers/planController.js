@@ -32,6 +32,7 @@ export const getPlanById = async (req, res) => {
 export const getPlanByDeedNumber = async (req, res) => {
   try {
     const { deedNumber } = req.params;
+    console.log(deedNumber);
     const plan = await Plan.findOne({ deedNumber });
     if (!plan) {
       return res.status(404).json({ message: "Plan not found" });

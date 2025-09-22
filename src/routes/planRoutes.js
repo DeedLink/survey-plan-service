@@ -5,8 +5,8 @@ import {
   getPlanById,
   updatePlan,
   deletePlan,
+  getPlanByDeedNumber,
 } from "../controllers/planController.js";
-import { getPlanByDeedNumber } from "../controllers/planController.js";
 
 const router = express.Router();
 
