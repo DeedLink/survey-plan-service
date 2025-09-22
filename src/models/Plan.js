@@ -14,6 +14,28 @@ const planSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    documentURI: {
+        type: String,
+        required: true,
+    },
+    coordinates: {
+        type: [
+            {
+                longitude: { type: Number, required: true },
+                latitude: { type: Number, required: true },
+            },
+        ],
+        validate: {
+            validator: function (v) {
+                return v.length > 2;
+            },
+            message: props => `${props.value} must have at least 3 coordinates!`,
+        },
+    },
+    areaSize: {
+        type: Number,
+        required: true,
+    },
     status: {
         type: String,
         enum: ['active', 'inactive', 'completed'],
