@@ -29,6 +29,20 @@ export const getPlanById = async (req, res) => {
   }
 };
 
+export const getPlanByDeedNumber = async (req, res) => {
+  try {
+    const { deedNumber } = req.params;
+    const plan = await Plan.findOne({ deedNumber });
+    if (!plan) {
+      return res.status(404).json({ message: "Plan not found" });
+    }
+    res.json(plan);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
 export const updatePlan = async (req, res) => {
   try {
     const plan = await Plan.findByIdAndUpdate(req.params.id, req.body, {

@@ -6,7 +6,7 @@ const planSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    deedId: {
+    deedNumber: {
         type: String,
         required: true,
     },
