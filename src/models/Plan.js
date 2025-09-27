@@ -1,5 +1,15 @@
 import mongoose from 'mongoose';
 
+const sideSchema = new mongoose.Schema(
+  {
+    North: { type: String, trim: true },
+    South: { type: String, trim: true },
+    East:  { type: String, trim: true },
+    West:  { type: String, trim: true }
+  },
+  { _id: false }
+);
+
 const planSchema = new mongoose.Schema({
     planId: {
         type: String,
@@ -32,6 +42,7 @@ const planSchema = new mongoose.Schema({
             message: props => `${props.value} must have at least 3 coordinates!`,
         },
     },
+    sides: [sideSchema],
     areaSize: {
         type: Number,
         required: true,
