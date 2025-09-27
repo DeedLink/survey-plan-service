@@ -42,7 +42,7 @@ const planSchema = new mongoose.Schema({
             message: props => `${props.value} must have at least 3 coordinates!`,
         },
     },
-    sides: [sideSchema],
+    sides: sideSchema,
     areaSize: {
         type: Number,
         required: true,
