@@ -26,7 +26,6 @@ const planSchema = new mongoose.Schema({
     },
     documentURI: {
         type: String,
-        required: true,
     },
     coordinates: {
         type: [

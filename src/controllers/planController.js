@@ -1,6 +1,7 @@
 import Plan from "../models/Plan.js";
 
 export const createPlan = async (req, res) => {
+  console.log(req.body);
   try {
     const plan = new Plan(req.body);
     await plan.save();
@@ -61,6 +62,25 @@ export const getPlanByDeedNumber = async (req, res) => {
       message: "Server error. Please try again later.", 
       error: error.message 
     });
+  }
+};
+
+export const getPlanByPlanId = async (req, res) => {
+  try {
+    const { planId } = req.params;
+    if (!planId) {
+      return res.status(400).json({ success: false, message: "Plan ID is required" });
+    }
+
+    const plan = await Plan.findOne({ planId });
+    if (!plan) {
+      return res.status(404).json({ success: false, message: `No plan found for planId: ${planId}` });
+    }
+
+    res.status(200).json({ success: true, data: plan });
+  } catch (error) {
+    console.error("Error fetching plan by planId:", error);
+    res.status(500).json({ success: false, message: "Server error", error: error.message });
   }
 };
 

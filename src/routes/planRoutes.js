@@ -6,10 +6,12 @@ import {
   updatePlan,
   deletePlan,
   getPlanByDeedNumber,
+  getPlanByPlanId,
 } from "../controllers/planController.js";
 
 const router = express.Router();
 
+router.get("/plan/:planId", getPlanByPlanId);
 router.post("/", createPlan);
 router.get("/", getPlans);
 router.get("/:id", getPlanById);
