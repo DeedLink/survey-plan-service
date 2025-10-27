@@ -11,7 +11,7 @@ export const createPlan = async (req, res) => {
   }
 };
 
-export const getPlans = async (req, res) => {
+export const getPlans = async (_req, res) => {
   try {
     const plans = await Plan.find();
     res.json(plans);
