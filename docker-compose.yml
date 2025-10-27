@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  app:
+    image: rasindudulshansiriwardhana/plan-service:latest
+    container_name: plan-service
+    ports:
+      - 5006:5006
+    env_file:
+      - .env
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:6.0
+    container_name: plan-mongo
+    ports:
+      - "27020:27017"
+    volumes:
+      - plan-mongo-data:/data/db
+
+volumes:
+  plan-mongo-data:
